@@ -107,7 +107,7 @@ const Greeting_4: React.FC<GreetingProps> = ({ name }) => {
 ### Using Components
 Components can be used within the hierarchy of your app and components to structure your application. This allows for code reuse and better organization.
 
-*example usage*
+*Components example usage*
 ``` tsx
 // src/App.tsx (update this file)
 import React from 'react'
@@ -136,3 +136,61 @@ export default App;
 
 *updated app using new components*  
 ![alt text](image-2.png)
+
+## State and Effect Hooks
+State allows components to manage and respond to changes in data. Effects are used to perform side effects in function components.
+
+### useState Hook
+The useState hook allows you to add state to functional components.
+
+``` tsx
+// src/components/Counter.tsx (make this file)
+import React, { useState } from 'react';
+
+const Counter: React.FC = () => {
+    const [count, setCount] = useState(0);
+
+    const IncreaseCount = () => {
+        setCount(count + 1)
+    }
+
+    return (<>
+        <p>You clicked {count} times</p>
+        <button
+            onClick={IncreaseCount}
+            >Click me
+        </button>
+    </>);
+}
+
+export default Counter;
+```
+
+*useState example usage*  
+``` jsx
+// src/App.tsx (update this file)
+import React from 'react'
+
+
+const people = [
+    "John Deer",
+    "Alice Smith",
+    "Bob Dole",
+    "Not Sure",
+];
+
+const App: React.FC = () => {
+    return (<>
+        <Greeting_1 name={people[0]} />
+        <Greeting_2 name={people[1]} />
+        <Greeting_3 name={people[2]} />
+
+        {/* will cause error because Greeting_4 is not imported, and currently unable to be imported */}
+        {/* <Greeting_4 name={people[3]} /> */}
+    </>)
+}
+
+export default App;
+```
+
+![alt text](image-3.png)
