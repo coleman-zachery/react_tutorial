@@ -30,7 +30,8 @@ cd project_demo
 npm install
 npm run dev # edit package.json, "scripts.dev": "vite --open" (auto open browser on run)
 ```
-you should now see the default react application boiler-place  
+
+*default react app view*  
 ![alt text](image.png)
 
 *default project directory set-up*  
@@ -77,7 +78,7 @@ Functional components are JavaScript functions that return JSX.
 
 *TSX component*
 ``` tsx
-# src/components/Greetings.tsx
+// src/components/Greetings.tsx (make this file)
 import React from 'react';
 
 interface GreetingProps {
@@ -97,7 +98,7 @@ export const Greeting_3: React.FC<GreetingProps> = ({ name }) => {
   return <h1>Good evening, {name}!</h1>;
 };
 
-# not exported (cannot be used outside of this file)
+// not exported (cannot be used outside of this file)
 const Greeting_4: React.FC<GreetingProps> = ({ name }) => {
   return <h1>Good night, {name}!</h1>;
 };
@@ -108,9 +109,9 @@ Components can be used within the hierarchy of your app and components to struct
 
 *example usage*
 ``` tsx
-# src/App.tsx
+// src/App.tsx (update this file)
 import React from 'react'
-import Greeting_1, { Greeting_2, Greeting_3 } from 'components/Greetings'
+import Greeting_1, { Greeting_2, Greeting_3 } from './components/Greetings';
 
 const people = [
     "John Deer",
@@ -121,14 +122,17 @@ const people = [
 
 const App: React.FC = () => {
     return (<>
-        <Greeting_1 name={people[0]}>
-        <Greeting_2 name={people[1]}>
-        <Greeting_3 name={people[2]}>
+        <Greeting_1 name={people[0]} />
+        <Greeting_2 name={people[1]} />
+        <Greeting_3 name={people[2]} />
 
-        # will cause error because Greeting_4 is not imported, and currently unable to be imported
-        <Greeting_4 name={people[3]}>
+        {/* will cause error because Greeting_4 is not imported, and currently unable to be imported */}
+        {/* <Greeting_4 name={people[3]} /> */}
     </>)
 }
 
 export default App;
 ```
+
+*updated app using new components*  
+![alt text](image-2.png)
