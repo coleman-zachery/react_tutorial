@@ -1,15 +1,15 @@
 import React from 'react'
 import { BrowserRouter as Router } from 'react-router-dom';
 import Views from './components/Views';
-import { GlobalCounterContextProvider } from './contexts/GlobalCounterProvider';
+import { CounterProvider } from './contexts/CounterProvider';
 
 const App: React.FC = () => {
     return (<>
-        <GlobalCounterContextProvider>
+        <CounterProvider>
             <Router>
                 <Views />
             </Router>
-        </GlobalCounterContextProvider>
+        </CounterProvider>
     </>)
 }
 

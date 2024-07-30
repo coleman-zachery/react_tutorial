@@ -60,7 +60,6 @@ const Welcome: React.FC = () => {
 ### Embedding Expressions
 You can embed a JavaScript expression in JSX by wrapping it in curly braces {}. This allows you to dynamically display values and use JavaScript logic within your markup.
 
-*embedding example*
 ``` jsx
 const name: string = 'John Deer'
 
@@ -76,7 +75,6 @@ React applications are built using components, which are reusable pieces of UI. 
 ### Functional Components
 Functional components are JavaScript functions that return JSX.
 
-*TSX component*
 ``` tsx
 // src/components/Greetings.tsx (make this file)
 import React from 'react';
@@ -107,7 +105,6 @@ const Greeting_4: React.FC<GreetingProps> = ({ name }) => {
 ### Using Components
 Components can be used within the hierarchy of your app and components to structure your application. This allows for code reuse and better organization.
 
-*Components example usage*
 ``` tsx
 // src/App.tsx (update this file)
 import React from 'react'
@@ -163,7 +160,6 @@ const Counter: React.FC = () => {
 export default Counter;
 ```
 
-*useState example usage*  
 ``` jsx
 // src/App.tsx (update this file)
 import React from 'react'
@@ -246,7 +242,6 @@ const FetchData: React.FC = () => {
 export default FetchData;
 ```
 
-*useEffect and conditional rendering example usage*  
 ``` tsx
 // src/App.tsx (update this file)
 import React from 'react'
@@ -263,6 +258,23 @@ export default App;
 
 *updated app w/ useEffect and conditional rendering*  
 ![alt text](image-4.png)
+
+*conditional rendering can also be achieved with the following syntax*
+``` tsx
+import React from 'react';
+
+const render1 = false;
+const render2 = true;
+
+const MyComponent: React.FC = () => {
+  return (<>
+    {render1 && <h1>Not Rendered!</h1>} {/* this will not render as 'render1' is false*/}
+    {render2 && <h1>Rendered!</h1>}
+  </>)
+}
+
+export MyComponent
+```
 
 ## Router
 React Router is a library that enables navigation among views or components in a React application, allowing for client-side routing. First, install the additional package `react-router-dom`.
@@ -303,7 +315,6 @@ const Views: React.FC = () => <>
 export default Views
 ```
 
-*Router example usage*  
 ``` jsx
 // src/App.tsx (update this file)
 import React from 'react'
@@ -327,4 +338,69 @@ export default App;
 ## Context
 The Context API is used to share state across the entire app (or part of it) without passing props down manually at every level.
 
+``` tsx
+// src/contexts/CounterProvider.tsx (make this file)
+import React, { createContext, useContext, useState } from 'react'
 
+const CounterContext = createContext<any>(0)
+export const useCounterContext = () => useContext(CounterContext)
+
+export const CounterProvider: React.FC<any> = ({ children }) => {
+    const [count, setCount] = useState(0)
+    const IncreaseCount = () => {
+        setCount(prevCount => prevCount + 1)
+    }
+
+    return (<>
+    <CounterContext.Provider value={{ count, IncreaseCount }}>
+        { children }
+    </CounterContext.Provider>
+    </>)
+}
+```
+
+``` tsx
+// src/components/Counter.tsx (update this file)
+import React from 'react';
+import { useCounterContext } from '../contexts/CounterProvider';
+
+const Counter: React.FC = () => {
+    const { count, IncreaseCount } = useCounterContext()
+
+    return (<>
+        <p>You clicked {count} times</p>
+        <button
+            onClick={IncreaseCount}
+            >Click me
+        </button>
+    </>);
+}
+
+export default Counter;
+```
+
+``` tsx
+// src/App.tsx (update this file)
+import React from 'react'
+import { BrowserRouter as Router } from 'react-router-dom';
+import Views from './components/Views';
+import { CounterProvider } from './contexts/CounterProvider';
+
+const App: React.FC = () => {
+    return (<>
+        <CounterProvider>
+            <Router>
+                <Views />
+            </Router>
+        </CounterProvider>
+    </>)
+}
+
+export default App;
+```
+
+*now switching views will not reset the count because its state uses a Context Provider*  
+![alt text](image-6.png)
+
+## Conclusion
+This completes the React tutorial along with examples of how to use functional components, state, effects, conditional rendering, router, and context in React with TypeScript.
