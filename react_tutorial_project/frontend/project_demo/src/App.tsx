@@ -1,9 +1,15 @@
 import React from 'react'
-import Counter from './components/Counter';
+import { BrowserRouter as Router } from 'react-router-dom';
+import Views from './components/Views';
+import { GlobalCounterContextProvider } from './contexts/GlobalCounterProvider';
 
 const App: React.FC = () => {
     return (<>
-        <Counter />
+        <GlobalCounterContextProvider>
+            <Router>
+                <Views />
+            </Router>
+        </GlobalCounterContextProvider>
     </>)
 }
 

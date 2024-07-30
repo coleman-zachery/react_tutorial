@@ -8,8 +8,8 @@ Welcome to the React Tutorial! This guide will walk you through the basics of Re
 2. [Getting Started](#getting-started)
 3. [JSX and TSX](#jsx-and-tsx)
 4. [Components](#components)
-5. [State and Effect Hooks](#state-and-effect-hooks)
-6. [Conditionals](#conditionals)
+5. [useState Hook](#state-hook)
+6. [useEffect Hook and Conditional Rendering](#effect-hook-conditional-rendering)
 7. [Router](#router)
 8. [Context](#context)
 
@@ -82,7 +82,7 @@ Functional components are JavaScript functions that return JSX.
 import React from 'react';
 
 interface GreetingProps {
-    name: string
+  name: string
 }
 
 const Greeting_1: React.FC<GreetingProps> = ({ name }) => {
@@ -137,11 +137,8 @@ export default App;
 *updated app using new components*  
 ![alt text](image-2.png)
 
-## State and Effect Hooks
-State allows components to manage and respond to changes in data. Effects are used to perform side effects in function components.
-
-### useState Hook
-The useState hook allows you to add state to functional components.
+## useState Hook
+The useState hook allows you to add state management to functional components.
 
 ``` tsx
 // src/components/Counter.tsx (make this file)
@@ -171,7 +168,6 @@ export default Counter;
 // src/App.tsx (update this file)
 import React from 'react'
 
-
 const people = [
     "John Deer",
     "Alice Smith",
@@ -193,4 +189,142 @@ const App: React.FC = () => {
 export default App;
 ```
 
+*updated app w/ useState*  
 ![alt text](image-3.png)
+
+## useEffect Hook and Conditional Rendering
+Effects are used to perform side effects in functional components, such as fetching data, directly updating the DOM, and timers. Conditional rendering in React allows you to render different elements or components based on a condition.
+
+*(example api json data fetched from [https://reqres.in/api/users](https://reqres.in/api/users))*
+
+``` tsx
+// src/components/FetchData.tsx (make this file)
+import React, { useState, useEffect } from 'react';
+
+const fetchUsers = async () => {
+    try {
+        const response = await fetch('https://reqres.in/api/users');
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const users = await response.json();
+        console.log(users);
+        return users;
+    }   catch (error) {
+        console.error('Error fetching users:', error);
+    }
+}
+
+const FetchData: React.FC = () => {
+    const [data, setData] = useState<any>(null);
+
+    useEffect(() => {
+        fetchUsers()
+        .then(response => setData(response.data))
+    }, [])
+
+    useEffect(() => {
+        if (data != null) {
+            alert('fetched data')
+        }
+    }, [data])
+
+    {/* conditional rendering example with if/else statement */}
+    if (data == null) {
+      return (<>
+        <p>Fetching data...</p>
+      </>)
+    } else {
+      return (<>
+          {data.map((row: any, index: number) => {
+            return <div key={index}>{row.email}</div>
+          })}
+      </>);
+    }
+}
+
+export default FetchData;
+```
+
+*useEffect and conditional rendering example usage*  
+``` tsx
+// src/App.tsx (update this file)
+import React from 'react'
+import FetchData from './components/FetchData';
+
+const App: React.FC = () => {
+    return (<>
+        <FetchData />
+    </>)
+}
+
+export default App;
+```
+
+*updated app w/ useEffect and conditional rendering*  
+![alt text](image-4.png)
+
+## Router
+React Router is a library that enables navigation among views or components in a React application, allowing for client-side routing. First, install the additional package `react-router-dom`.
+
+> npm install react-router-dom
+
+``` tsx
+// src/components/Views.tsx (make this file)
+import React from "react";
+import { Routes, Route, Link } from 'react-router-dom';
+
+const Home: React.FC = () => <h1>Welcome home!</h1>
+import Counter from "./Counter";
+import FetchData from "./FetchData";
+import Greeting_1, { Greeting_2, Greeting_3 } from "./Greetings";
+const NotFound: React.FC = () => <h1>Page not found!</h1>
+
+const Views: React.FC = () => <>
+    <ul>
+        <li><Link to='/'>Home</Link></li>
+        <li><Link to='/Counter'>Counter</Link></li>
+        <li><Link to='/FetchData'>FetchData</Link></li>
+        <li><Link to='/Greeting_1'>Greeting_1</Link></li>
+        <li><Link to='/Greeting_2'>Greeting_2</Link></li>
+        <li><Link to='/Greeting_3'>Greeting_3</Link></li>
+    </ul>
+    <Routes>
+        <Route path='/' element={<Home />}></Route>
+        <Route path='/Counter' element={<Counter />}></Route>
+        <Route path='/FetchData' element={<FetchData />}></Route>
+        <Route path='/Greeting_1' element={<Greeting_1 name='John Deer'/>}></Route>
+        <Route path='/Greeting_2' element={<Greeting_2 name='Alice Smith'/>}></Route>
+        <Route path='/Greeting_3' element={<Greeting_3 name='Bob Dole'/>}></Route>
+        <Route path='/*' element={<NotFound />}></Route>
+    </Routes>
+</>
+
+export default Views
+```
+
+*Router example usage*  
+``` jsx
+// src/App.tsx (update this file)
+import React from 'react'
+import { BrowserRouter as Router } from 'react-router-dom';
+import Views from './components/Views';
+
+const App: React.FC = () => {
+    return (<>
+        <Router>
+            <Views />
+        </Router>
+    </>)
+}
+
+export default App;
+```
+
+*updated app w/ Router*  
+![alt text](image-5.png)
+
+## Context
+The Context API is used to share state across the entire app (or part of it) without passing props down manually at every level.
+
+

@@ -1,16 +1,13 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { useGlobalCounterContext } from '../contexts/GlobalCounterProvider';
 
 const Counter: React.FC = () => {
-    const [count, setCount] = useState(0);
-
-    const IncreaseCount = () => {
-        setCount(count + 1)
-    }
+    const { GlobalCount, IncreaseGlobalCount } = useGlobalCounterContext()
 
     return (<>
-        <p>You clicked {count} times</p>
+        <p>You clicked {GlobalCount} times</p>
         <button
-            onClick={IncreaseCount}
+            onClick={IncreaseGlobalCount}
             >Click me
         </button>
     </>);
