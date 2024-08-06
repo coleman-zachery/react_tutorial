@@ -248,9 +248,9 @@ import React from 'react'
 import FetchData from './components/FetchData';
 
 const App: React.FC = () => {
-    return (<>
+    return (
         <FetchData />
-    </>)
+    )
 }
 
 export default App;
@@ -322,11 +322,11 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import Views from './components/Views';
 
 const App: React.FC = () => {
-    return (<>
+    return (
         <Router>
             <Views />
         </Router>
-    </>)
+    )
 }
 
 export default App;
@@ -351,11 +351,11 @@ export const CounterProvider: React.FC<any> = ({ children }) => {
         setCount(prevCount => prevCount + 1)
     }
 
-    return (<>
-    <CounterContext.Provider value={{ count, IncreaseCount }}>
-        { children }
-    </CounterContext.Provider>
-    </>)
+    return (
+        <CounterContext.Provider value={{ count, IncreaseCount }}>
+            { children }
+        </CounterContext.Provider>
+    )
 }
 ```
 
