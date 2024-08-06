@@ -11,7 +11,7 @@ Welcome to the React Tutorial! This guide will walk you through the basics of Re
 5. [useState Hook](#state-hook)
 6. [useEffect Hook and Conditional Rendering](#effect-hook-conditional-rendering)
 7. [Router](#router)
-8. [Context](#context)
+8. [Context Providers](#context-providers)
 
 ## History and Purpose
 
@@ -335,7 +335,7 @@ export default App;
 *updated app w/ Router*  
 ![alt text](image-5.png)
 
-## Context
+## Context Providers
 The Context API is used to share state across the entire app (or part of it) without passing props down manually at every level.
 
 ``` tsx
