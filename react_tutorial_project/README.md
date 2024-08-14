@@ -1,4 +1,5 @@
-More in-depth example on Routing and Conditional Rendering with connecting the frontend to the back-end
+- Prerequisite: Familiarity with Javascript
+- Feedback: Implement a more in-depth example on Routing and Conditional Rendering with connecting the frontend to the backend
 
 # React Tutorial (w/ Vite.js and Typescript)
 
