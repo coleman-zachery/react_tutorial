@@ -1,3 +1,5 @@
+More in-depth example on Routing and Conditional Rendering with connecting the frontend to the back-end
+
 # React Tutorial (w/ Vite.js and Typescript)
 
 Welcome to the React Tutorial! This guide will walk you through the basics of React, including its history, purpose, and core concepts. By the end of this tutorial, you'll be able to create a basic React application with functional components, manage state and effects, use conditionals, implement routing, and use context for state management.
