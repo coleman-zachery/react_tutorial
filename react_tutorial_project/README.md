@@ -11,8 +11,8 @@ Welcome to the React Tutorial! This guide will walk you through the basics of Re
 2. [Getting Started](#getting-started)
 3. [JSX and TSX](#jsx-and-tsx)
 4. [Components](#components)
-5. [useState Hook](#state-hook)
-6. [useEffect Hook and Conditional Rendering](#effect-hook-conditional-rendering)
+5. [useState Hook](#usestate-hook)
+6. [useEffect Hook and Conditional Rendering](#useeffect-hook-and-conditional-rendering)
 7. [Router](#router)
 8. [Context Providers](#context-providers)
 
