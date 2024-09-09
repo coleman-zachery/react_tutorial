@@ -1,5 +1,28 @@
-- Prerequisites: Node.js and Familiarity with Javascript
-- Feedback: Implement a more in-depth example on Routing and Conditional Rendering with connecting the frontend to the backend
+*Feedback: Implement a more in-depth example on Routing and Conditional Rendering with connecting the frontend to the backend*
+
+## *Prerequisites*
+
+Before diving into this React tutorial, please ensure you meet the following prerequisites:
+
+#### 1. Basic Knowledge of HTML & CSS:
+- **HTML Elements and Structure**: Ability to create and understand basic HTML elements and document structure.
+- **CSS Styling**: Familiarity with basic CSS for styling components, including concepts like selectors, properties, and responsive design.
+
+#### 2. Basic Understanding of JavaScript:
+- **Knowledge of ES6+ Features**: Familiarity with modern JavaScript features such as arrow functions, template literals, destructuring, and modules.
+- **Asynchronous Programming**: Understanding of Promises, async/await, and basic AJAX/fetch operations.
+
+#### 3. Familiarity with TypeScript:
+- **Type System Basics**: Understanding of TypeScript types (e.g., string, number, boolean, array, object) and type annotations.
+- **Interfaces and Types**: Ability to define and use interfaces and type aliases for type safety.
+
+#### 4. Familiarity with Node.js and npm:
+- **Node.js**: Knowledge of Node.js environment for running JavaScript server-side.
+- **npm**: Understanding of npm (Node Package Manager) for managing project dependencies.
+
+#### 5. Familiarity with Functional Programming Concepts:
+- **Functions as First-Class Citizens**: Understanding of functions as objects, higher-order functions, and closures.
+- **State Management**: Basic knowledge of managing state in functional programming.
 
 # React Tutorial (w/ Vite.js and Typescript)
 
