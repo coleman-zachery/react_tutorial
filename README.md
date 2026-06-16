@@ -1,5 +1,3 @@
-*Feedback: Implement a more in-depth example on Routing and Conditional Rendering with connecting the frontend to the backend*
-
 ## *Prerequisites*
 
 Before diving into this React tutorial, please ensure you meet the following prerequisites:
@@ -50,15 +48,14 @@ To get started with React, you'll need to have Node.js and npm (Node Package Man
 Once you have Node.js and npm installed, you can create a new React application using Create React App, a tool that sets up a new React project with a sensible default configuration.
 
 ```bash
-mkdir frontend && cd frontend
 npm create vite@latest project_demo -- --template react-ts
 cd project_demo
 npm install
-npm run dev # edit package.json, "scripts.dev": "vite --open" (auto open browser on run)
+npm run dev
 ```
 
 *default react app view*  
-![alt text](image.png)
+![alt text](image-0.png)
 
 *default project directory set-up*  
 ![alt text](image-1.png)
@@ -210,49 +207,76 @@ Effects are used to perform side effects in functional components, such as fetch
 
 ``` tsx
 // src/components/FetchData.tsx (make this file)
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from "react";
 
-const fetchUsers = async () => {
-    try {
-        const response = await fetch('https://reqres.in/api/users');
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        const users = await response.json();
-        console.log(users);
-        return users;
-    }   catch (error) {
-        console.error('Error fetching users:', error);
-    }
-}
+type User = {
+  id: number;
+  name: string;
+  email: string;
+};
+
+const fetchUsers = async (): Promise<User[]> => {
+  const response = await fetch(
+    "https://jsonplaceholder.typicode.com/users"
+  );
+
+  if (!response.ok) {
+    throw new Error(`HTTP error! status: ${response.status}`);
+  }
+
+  return response.json();
+};
 
 const FetchData: React.FC = () => {
-    const [data, setData] = useState<any>(null);
+  const [data, setData] = useState<User[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
 
-    useEffect(() => {
-        fetchUsers()
-        .then(response => setData(response.data))
-    }, [])
+  useEffect(() => {
+    fetchUsers()
+      .then((users) => {
+        setData(users);
+      })
+      .catch((err) => {
+        console.error("Error fetching users:", err);
+        setError("Failed to fetch users.");
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  }, []);
 
-    useEffect(() => {
-        if (data != null) {
-            alert('fetched data')
-        }
-    }, [data])
+  if (loading) {
+    return <p>Fetching data...</p>;
+  }
 
-    {/* conditional rendering example with if/else statement */}
-    if (data == null) {
-      return (<>
-        <p>Fetching data...</p>
-      </>)
-    } else {
-      return (<>
-          {data.map((row: any, index: number) => {
-            return <div key={index}>{row.email}</div>
-          })}
-      </>);
-    }
-}
+  if (error) {
+    return <p>{error}</p>;
+  }
+
+  return (
+    <div>
+      <h2>Users (Dummy Data fetched from "https://jsonplaceholder.typicode.com/users")</h2>
+
+      {data.map((user) => (
+        <div
+          key={user.id}
+          style={{
+            border: "1px solid #ccc",
+            padding: "12px",
+            marginBottom: "8px",
+            borderRadius: "4px",
+          }}
+        >
+          <div>
+            <strong>{user.name}</strong>
+          </div>
+          <div>{user.email}</div>
+        </div>
+      ))}
+    </div>
+  );
+};
 
 export default FetchData;
 ```

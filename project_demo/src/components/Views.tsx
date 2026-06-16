@@ -1,11 +1,12 @@
 import React from "react";
-import { Routes, Route, Link } from 'react-router-dom';
+import { Routes, Route, Link } from "react-router-dom";
 
-const Home: React.FC = () => <h1>Welcome home!</h1>
 import Counter from "./Counter";
 import FetchData from "./FetchData";
 import Greeting_1, { Greeting_2, Greeting_3 } from "./Greetings";
-const NotFound: React.FC = () => <h1>Page not found!</h1>
+
+const Home: React.FC = () => <h1>Welcome home!</h1>;
+const NotFound: React.FC = () => <h1>Page not found!</h1>;
 
 const Views: React.FC = () => <>
     <ul>
