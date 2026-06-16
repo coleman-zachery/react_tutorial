@@ -443,3 +443,6 @@ export default App;
 
 ## Conclusion
 This completes the React tutorial along with examples of how to use functional components, state, effects, conditional rendering, router, and context in React with TypeScript.
+
+## Exercise left for the student
+Implement a [React App Bar using Material UI's App Bar component](https://mui.com/material-ui/react-app-bar/) to organize and display the project's navigation links. This will provide a dedicated header section for navigation, improve the application's structure, and create a more polished user experience.
